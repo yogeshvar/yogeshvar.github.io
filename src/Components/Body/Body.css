@@ -1,0 +1,61 @@
+* {
+    font-family: 'Source Sans Pro';
+}
+
+.body * { 
+    color: white;
+}
+
+.start-align {
+    text-align: start;
+}
+
+.end-align {
+    text-align: end;
+}
+
+
+
+
+.body {
+    top: 0px;
+    left: 0px;
+    background: none !important;
+    max-width: 750px;
+    margin: 0 auto !important;
+    float: none !important;
+    margin-top: 30px !important;
+}
+
+.max-width {
+    max-width: 750px;
+}
+
+.course {
+    margin: 0px;
+    font-size: 12.5px;
+    color: #9b9b9b;
+    line-height: 1.2;
+    text-align: start;
+    padding-top: 5px;
+}
+
+.title {
+    font-weight: 800;
+    font-size: 20px;
+    text-align: start;
+}
+
+.title > a {
+    caret-color: #9b9b9b;
+    color: #9b9b9b;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: #343131;
+}
+
+.date {
+    caret-color: #9b9b9b;
+    color: #9b9b9b;
+    font-size: smaller;
+}
