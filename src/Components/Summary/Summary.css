@@ -3,15 +3,87 @@
     color: #ffffffcf !important;
 }
 
+.ant-timeline-item-tail {
+    border-color: #ffffffcf !important;
+}
+
+.ant-timeline-item {
+    padding-bottom: 0px !important;
+}
+
 .text-content {
     padding: 4px 0px;
 }
+
+/* get last - 1 child */
+.custom-timeline > li:nth-last-child(2) > .ant-timeline-item-tail {
+    height: calc(20%) !important;
+}
+
+.custom-timeline > li:nth-child(odd) > .ant-timeline-item-head {
+    margin: 0px 2.5px !important;
+}
+
+.custom-timeline>li:nth-child(even)>.ant-timeline-item-head {
+    margin: 0px -2.5px !important;
+}
+
+/* get custom-timeline 2nd li element */
+.custom-timeline > li:nth-child(2) > .ant-timeline-item-content {
+    margin: -100px 0 !important; 
+}
+
+.custom-timeline>li:nth-child(5)>.ant-timeline-item-content {
+    margin: -80px 0 !important;
+    padding: 0px 25px !important;
+}
+
+.custom-dot-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.custom-dot-img:hover {
+    transform: scale(3);
+    z-index: 99;
+    transition: 0.3s;
+}
+
+.ant-timeline-item-head {
+    background-color: inherit !important;
+}
+
+.custom-timeline>li:nth-child(6)>.ant-timeline-item-content {
+    margin: 0px 0 !important;
+}
+
+.custom-timeline>li:nth-child(7)>.ant-timeline-item-content {
+    margin: -70px 0 !important;
+    padding: 0px 20px !important;
+}
+
+.custom-timeline>li:nth-child(8)>.ant-timeline-item-content {
+    margin: -140px 0 !important;
+}
+
+.custom-timeline>li:nth-child(11)>.ant-timeline-item-content {
+    margin: -90px 0 !important;
+    padding: 0px 20px !important;
+}
+
+.custom-timeline>li:nth-child(13)>.ant-timeline-item-content {
+    margin: -110px 0 !important;
+    padding: 0px 20px !important;
+}
+
 
 .max-width {
     top: 0px;
     left: 0px;
     background: none !important;
-    max-width: 750px;
+    max-width: 650px;
     margin: 0 auto !important;
     float: none !important;
     margin-top: 10px !important;
@@ -41,4 +113,8 @@
 
 .end-align {
     text-align: end;
+}
+
+.ant-timeline-item-tail {
+    height: calc(120%) !important;
 }
