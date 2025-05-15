@@ -1022,4 +1022,21 @@ function showNewsletterDialog() {
 function closeNewsletterDialog() {
   const dialog = document.getElementById('newsletter-dialog');
   dialog.close();
-} 
+}
+
+// Add close function for the first visit dialog
+function closeFirstVisitDialog() {
+  const dialog = document.querySelector('.first-visit-dialog');
+  if (dialog) {
+    dialog.close();
+    dialog.remove();
+  }
+}
+
+// Add click outside to close
+document.addEventListener('click', (e) => {
+  const dialog = document.querySelector('.first-visit-dialog');
+  if (dialog && e.target === dialog) {
+    closeFirstVisitDialog();
+  }
+}); 
