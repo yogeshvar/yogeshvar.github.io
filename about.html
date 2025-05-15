@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-size="medium" data-spacing="normal">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Yogeshvar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="profile.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="controls">
+    <button class="control-button" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="theme-icon">☀️</span>
+    </button>
+    <button class="control-button" onclick="adjustFontSize('down')" aria-label="Decrease font size">A-</button>
+    <button class="control-button" onclick="adjustFontSize('up')" aria-label="Increase font size">A+</button>
+    <button class="control-button" onclick="adjustSpacing()" aria-label="Adjust line spacing">↕️</button>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-indicator"></div>
+    <div class="progress-percentage">0%</div>
+  </div>
+
+  <div class="content">
+    <header>
+      <nav class="site-nav">
+        <a href="index.html">Blog</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+    </header>
+
+    <article class="profile">
+      <div class="profile-header">
+        <img src="assets/images/profile.png" alt="Yogeshvar's Profile" class="profile-image">
+        <h1>Yogeshvar</h1>
+        <p class="profile-subtitle">Software Developer @ MD Think</p>
+      </div>
+
+      <div class="profile-links">
+        <a href="mailto:your-email@example.com" class="profile-link">
+          <span class="icon">📧</span>
+          Email
+        </a>
+        <a href="your-resume-link" class="profile-link" target="_blank">
+          <span class="icon">📄</span>
+          Resume
+        </a>
+        <a href="https://github.com/yogeshvar" class="profile-link" target="_blank">
+          <span class="icon">🐙</span>
+          GitHub
+        </a>
+      </div>
+
+      <section class="profile-section">
+        <h2>Summary</h2>
+        <p>
+          As a highly competent software engineer with three years of experience, I possess the skills to
+          develop and maintain software applications in multiple programming languages. I am passionate about
+          learning and exploring new technologies and eager to contribute my skills to a dynamic team.
+          My ability to work collaboratively and manage projects while adhering to best practices makes me
+          an effective team player.
+        </p>
+      </section>
+
+      <section class="profile-section">
+        <h2>Experience</h2>
+        <div class="experience-timeline">
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3>Senior Software Engineer @ MD Think</h3>
+              <p class="duration">Mar 2024 - Present · Hybrid · Maryland, United States</p>
+            </div>
+            <p class="description">
+              Full-stack developer integrating AI systems into production workflows. Building intelligent agents and LLM-powered tools for Child Welfare projects.
+            </p>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3>Technical Advisor @ Fitsys India</h3>
+              <p class="duration">Jan 2023 - Present · Remote · Chennai, India</p>
+            </div>
+            <p class="description">
+              Guide teams in software architecture and engineering best practices. Review code quality and advise on CI/CD implementation.
+            </p>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3>Software Engineer @ GyanMatrix</h3>
+              <p class="duration">May 2019 - Jun 2021 · On-site · Bengaluru, India</p>
+            </div>
+            <p class="description">
+              Built full-stack applications with React.js, Node.js, and AWS. Implemented microservices using Docker and Kubernetes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section">
+        <h2>Projects</h2>
+        <ul class="projects-list">
+          <li class="project-item" onclick="showProjectDialog('vitalsens-dialog')">
+            <div class="project-header">
+              <span class="project-icon">🔬</span>
+              <h3 class="project-title">VitalSens</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-embedded">Embedded Programming</span>
+              <span class="project-tag tag-android">Android</span>
+              <span class="project-tag tag-internship">Internship Project</span>
+            </div>
+          </li>
+
+          <dialog id="vitalsens-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">🔬</span>
+                <h2>VitalSens</h2>
+                <span class="dialog-date">May 9, 2021 4:58 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-embedded">Embedded Programming</span>
+                <span class="project-tag tag-android">Android</span>
+                <span class="project-tag tag-internship">Internship Project</span>
+              </div>
+              <div class="dialog-description">
+                <ul>
+                  <li>Working on the next generation of a clinical-grade wearable device capable of continuous blood oxygen saturation level, ECG, heart rate, body activity, and skin temperature with wireless connectivity.</li>
+                  <li>Developed an android application for the wearable health monitor based on CC2650, a wireless MCU for Bluetooth LE, Zigbee, and 6LoWPAN applications from Texas Instruments.</li>
+                  <li>Designed a custom dashboard with card view and real-time graphical display for the application and make sure it is compatible on all various screen sizes and devices</li>
+                  <li>Application is capable of pushing the recorded metrics onto local storage, as well as an option to upload to google drive for future reference.</li>
+                </ul>
+              </div>
+              <div class="dialog-footer">
+                <div class="dialog-link">
+                  <img src="https://www.google.com/s2/favicons?domain=hticiitm.org&sz=32" alt="HTIC" class="dialog-org-logo">
+                  <a href="https://www.hticiitm.org/vitalsens" target="_blank">
+                    <span class="org-name">HTIC IITMadras</span>
+                    <span class="org-url">www.hticiitm.org</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <li class="project-item" onclick="showProjectDialog('urosens-dialog')">
+            <div class="project-header">
+              <span class="project-icon">⚠️</span>
+              <h3 class="project-title">Urosens</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-embedded">Embedded Programming</span>
+              <span class="project-tag tag-android">Android</span>
+              <span class="project-tag tag-internship">Internship Project</span>
+            </div>
+          </li>
+
+          <dialog id="urosens-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">⚠️</span>
+                <h2>Urosens</h2>
+                <span class="dialog-date">May 9, 2021 4:58 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-embedded">Embedded Programming</span>
+                <span class="project-tag tag-android">Android</span>
+                <span class="project-tag tag-internship">Internship Project</span>
+              </div>
+              <div class="dialog-description">
+                <p>A Bluetooth Device that measures the urine bag for the ICU Patients and notifies the respective medical persons.</p>
+              </div>
+              <div class="dialog-footer">
+                <div class="dialog-link">
+                  <img src="https://www.google.com/s2/favicons?domain=hticiitm.org&sz=32" alt="HTIC" class="dialog-org-logo">
+                  <a href="https://www.hticiitm.org/urosens" target="_blank">
+                    <span class="org-name">HTIC IITMadras</span>
+                    <span class="org-url">www.hticiitm.org</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <li class="project-item" onclick="showProjectDialog('beepr-dialog')">
+            <div class="project-header">
+              <span class="project-icon">🔒</span>
+              <h3 class="project-title">Beepr</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-product">Product Development</span>
+              <span class="project-tag tag-fullstack">Full Stack</span>
+              <span class="project-tag tag-internship">Internship Project</span>
+            </div>
+          </li>
+
+          <dialog id="beepr-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">🔒</span>
+                <h2>Beepr</h2>
+                <span class="dialog-date">May 9, 2021 4:58 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-product">Product Development</span>
+                <span class="project-tag tag-fullstack">Full Stack</span>
+                <span class="project-tag tag-internship">Internship Project</span>
+              </div>
+              <div class="dialog-description">
+                <p>App designed to make users experience an anti-feed approach towards social media.</p>
+              </div>
+              <div class="dialog-footer">
+                <div class="dialog-link">
+                  <a href="https://github.com/yogeshvar/beepr" target="_blank">
+                    <span class="org-name">View on GitHub</span>
+                    <span class="org-url">github.com/yogeshvar/beepr</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <li class="project-item" onclick="showProjectDialog('ezbill-dialog')">
+            <div class="project-header">
+              <span class="project-icon">📊</span>
+              <h3 class="project-title">EzBill</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-product">Product Development</span>
+              <span class="project-tag tag-fullstack">Full Stack</span>
+              <span class="project-tag tag-college">College Project</span>
+            </div>
+          </li>
+
+          <dialog id="ezbill-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">📊</span>
+                <h2>EzBill</h2>
+                <span class="dialog-date">Feb 16, 2023 2:55 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-product">Product Development</span>
+                <span class="project-tag tag-fullstack">Full Stack</span>
+                <span class="project-tag tag-college">College Project</span>
+              </div>
+              <div class="dialog-description">
+                <p>The revolutionary app for cost-sharing living arrangements. With skyrocketing housing costs, Ezbill offers a simple and effective solution to divide and track shared expenses. Say goodbye to the headache of splitting bills equally. Ezbill's innovative approach charges housemates only for their usage of utilities, ensuring a fair and accurate distribution of costs. With Ezbill, you can easily manage and track expenses, saving you time, money, and headaches. Join the growing community of satisfied users and start simplifying your shared living arrangements today with Ezbill.</p>
+                
+                <h3>Architecture:</h3>
+                <h4>Init Design:</h4>
+                <img src="assets/images/init.png" alt="Initial Architecture" class="dialog-image">
+                
+                <h4>Final Design:</h4>
+                <img src="assets/images/arch.png" alt="Final Architecture" class="dialog-image">
+                
+                <h4>Technical Details:</h4>
+                <img src="assets/images/technical.png" alt="Technical Documentation" class="dialog-image">
+                <ul>
+                  <li>Built with Flutter for cross-platform mobile development</li>
+                  <li>Backend powered by Node.js with Socket.io for real-time updates</li>
+                  <li>MongoDB Atlas for database management</li>
+                  <li>AWS S3 for storage</li>
+                  <li>Firebase Cloud Messaging for notifications</li>
+                  <li>JWT for authentication</li>
+                  <li>REST API and WebSocket integration</li>
+                </ul>
+              </div>
+              <div class="dialog-footer">
+                <div class="dialog-link">
+                  <a href="https://github.com/yogeshvar/ezbill" target="_blank">
+                    <span class="org-name">View on GitHub</span>
+                    <span class="org-url">github.com/yogeshvar/ezbill</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <li class="project-item" onclick="showProjectDialog('baymax-dialog')">
+            <div class="project-header">
+              <span class="project-icon">🤖</span>
+              <h3 class="project-title">BayMax</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-research">Research Project</span>
+              <span class="project-tag tag-aiml">AI/ML</span>
+              <span class="project-tag tag-product">Product Development</span>
+            </div>
+          </li>
+
+          <dialog id="baymax-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">🤖</span>
+                <h2>BayMax</h2>
+                <span class="dialog-date">Feb 16, 2023 2:56 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-research">Research Project</span>
+                <span class="project-tag tag-aiml">AI/ML</span>
+                <span class="project-tag tag-product">Product Development</span>
+              </div>
+              <div class="dialog-description">
+                <h3>A Comprehensive Experimental Evaluation Towards Positive Emotion: AI-Based Expression Rephrasing</h3>
+                
+                <h4>Base Architecture:</h4>
+                <img src="assets/images/base.png" alt="Base Architecture" class="dialog-image">
+                
+                <h4>Tokenizer:</h4>
+                <img src="assets/images/tokenizer.png" alt="Tokenizer Architecture" class="dialog-image">
+              </div>
+              <div class="dialog-footer">
+                <div class="dialog-link">
+                  <a href="https://github.com/yogeshvar/baymax" target="_blank">
+                    <span class="org-name">View on GitHub</span>
+                    <span class="org-url">github.com/yogeshvar/baymax</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <li class="project-item" onclick="showProjectDialog('advertir-dialog')">
+            <div class="project-header">
+              <span class="project-icon">🏠</span>
+              <h3 class="project-title">Advertir</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-college">College Project</span>
+              <span class="project-tag tag-product">Product Development</span>
+              <span class="project-tag tag-fullstack">Full Stack</span>
+              <span class="project-tag tag-oss">OSS</span>
+            </div>
+          </li>
+
+          <dialog id="advertir-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">🏠</span>
+                <h2>Advertir</h2>
+                <span class="dialog-date">Feb 22, 2023 10:15 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-college">College Project</span>
+                <span class="project-tag tag-product">Product Development</span>
+                <span class="project-tag tag-fullstack">Full Stack</span>
+                <span class="project-tag tag-oss">OSS</span>
+              </div>
+              <div class="dialog-description">
+                <p>Advertir is a secure and user-friendly Android app designed to help travelers navigate the new challenges posed by the COVID-19 pandemic. With real-time COVID-19 status updates by country and contact tracing capabilities, Advertir provides a comprehensive solution for safe and informed travel. The app includes a search function for travel destinations and trending places, as well as a feature called "Advertir Care" that tracks potential COVID-19 exposure through contact tracing. Advertir is the perfect choice for those who prioritize privacy and safety while traveling.</p>
+              </div>
+              <div class="dialog-footer">
+                <div class="dialog-link">
+                  <a href="https://github.com/yogeshvar/advertir" target="_blank">
+                    <span class="org-name">View on GitHub</span>
+                    <span class="org-url">github.com/yogeshvar/advertir</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+          <li class="project-item" onclick="showProjectDialog('gh-templates-dialog')">
+            <div class="project-header">
+              <span class="project-icon">📄</span>
+              <h3 class="project-title">Gh-Templates</h3>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag tag-python">Python</span>
+              <span class="project-tag tag-github">Github</span>
+              <span class="project-tag tag-research">Research Project</span>
+              <span class="project-tag tag-college">College Project</span>
+            </div>
+          </li>
+
+          <dialog id="gh-templates-dialog" class="project-dialog">
+            <div class="dialog-content">
+              <div class="dialog-header">
+                <span class="dialog-icon">📄</span>
+                <h2>Gh-Templates</h2>
+                <span class="dialog-date">Jul 20, 2023 6:08 AM</span>
+              </div>
+              <div class="dialog-tags">
+                <span class="project-tag tag-python">Python</span>
+                <span class="project-tag tag-github">Github</span>
+                <span class="project-tag tag-research">Research Project</span>
+                <span class="project-tag tag-college">College Project</span>
+              </div>
+              <div class="dialog-description">
+                <h3>Time-to-close: an analysis of GitHub Issue/Pull Request Templates</h3>
+                <div class="pdf-container">
+                  <object
+                    data="assets/pdfs/gh-templates.pdf"
+                    type="application/pdf"
+                    width="100%"
+                    height="600px">
+                    <p>Unable to display PDF file. <a href="assets/pdfs/gh-templates.pdf" target="_blank">Download</a> instead.</p>
+                  </object>
+                </div>
+                <div class="dialog-footer">
+                  <div class="dialog-link">
+                    <a href="https://github.com/yogeshvar/gh-templates" target="_blank">
+                      <span class="org-name">View on GitHub</span>
+                      <span class="org-url">github.com/yogeshvar/gh-templates</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </dialog>
+        </ul>
+      </section>
+
+      <section class="profile-section">
+        <h2>Volunteer Experience</h2>
+        
+        <div class="experience-item">
+          <h3>Professional Trainer @ <a href="https://gyanmatrix.com" target="_blank">Gyanmatrix</a></h3>
+          <p class="description">We have delivered training sessions on Practicing clean code, Refactoring, Continuous Integration, Continuous Deployment, Cloud deployment, Docker, Kubernetes, and Advanced Technologies.</p>
+        </div>
+
+        <div class="experience-item">
+          <h3>Professional Trainer @ <a href="https://tektutor.org" target="_blank">TekTutor</a></h3>
+          <p class="description">We delivered training sessions on Practicing clean code, Refactoring, Continuous Integration, Continuous Deployment, Cloud deployment, Docker, Kubernetes, and Advanced Technologies.</p>
+        </div>
+
+        <div class="experience-item">
+          <h3>Joint Secretary @ Association Of Computer</h3>
+          <p class="description">Conducted and organized a National level technical symposium ELEMENTS'2k16, which included events like Gaming, Treasure Hunt, Paper Presentation, Quizmaster, and Best Manager.</p>
+        </div>
+      
+        <div class="experience-item">
+          <h3>Member of Wearable Club @ <a href="https://www.hticiitm.org/" target="_blank">SREC</a></h3>
+          <p class="description">As a member, I have organized two intra-college competitions combined with IITM's HTIC that involve mentoring students and judging the prototypes.</p>
+        </div>
+      </section>
+
+      <section class="profile-section">
+        <h2>🤓 Other Stuff that I have worked on</h2>
+        <div class="other-projects-grid">
+          <div class="other-project-card">
+            <img src="assets/images/langchain.png" alt="LangChain" class="project-image">
+            <h3>Lang Chain</h3>
+          </div>
+          <div class="other-project-card">
+            <img src="assets/images/ai.png" alt="Agentic AI" class="project-image">
+            <h3>Agentic AI</h3>
+          </div>
+          <div class="other-project-card">
+            <img src="assets/images/expo.png" alt="Expo" class="project-image">
+            <h3>Expo</h3>
+          </div>
+        </div>
+      </section>
+    </article>
+  </div>
+</body>
+
+</html>
