@@ -78,6 +78,11 @@ article {
   max-width: 35rem;
   margin: 0 auto;
 }
+@media (max-width: 768px) {
+  article {
+    padding: 5px;
+  }
+}
 
 .post-title {
   font-family: 'Crimson Pro', Georgia, serif;
@@ -271,7 +276,7 @@ p {
 
 @media (max-width: 768px) {
   .newsletter-dialog {
-    width: 95%;
+    width: 80%;
     padding: 1.5rem;
   }
 }
@@ -444,6 +449,7 @@ p {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
   margin: 2rem 0;
+  padding: 0 1rem;
 }
 
 .blog-card {
@@ -635,33 +641,89 @@ p {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .blog-grid[data-view="list"] {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    padding: 0 1.5rem;
+  }
+
+  .blog-card {
+    height: auto;
+    min-height: 200px;
+    padding: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-excerpt {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2;
+    margin-bottom: 1rem;
+  }
+
+  .card-meta {
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .content {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-header {
+    padding: 0 1.5rem;
+  }
+
+  .tabs {
+    padding: 0 1.5rem 1rem 1.5rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .tab {
+    white-space: nowrap;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-grid {
+    gap: 1rem;
+    margin: 1rem 0;
     padding: 0 1rem;
   }
-  
-  .blog-grid[data-view="list"] .blog-card {
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
+
+  .blog-card {
     padding: 1rem;
   }
-  
-  .blog-grid[data-view="list"] .card-date {
-    grid-column: 1;
-    grid-row: 2;
-    font-size: 0.85rem;
+
+  .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
   }
-  
-  .blog-grid[data-view="list"] .card-title {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    white-space: normal;
-    margin-bottom: 0.25rem;
+
+  .card-meta {
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
   }
-  
-  .blog-grid[data-view="list"] .card-meta {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: end;
+
+  .card-category {
+    font-size: 0.8rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .reading-time {
+    font-size: 0.8rem;
   }
 }
 
@@ -814,7 +876,7 @@ p {
 /* Responsive adjustments for tabs */
 @media (max-width: 768px) {
   .tabs {
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 1.5rem 1rem 1.5rem;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
