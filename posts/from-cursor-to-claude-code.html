@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>From Cursor to Claude Code — Yogeshvar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-top: 2rem;
+    }
+    .post-date {
+      color: #555;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.3rem;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+  <h1>From Cursor to Claude Code</h1>
+  <p class="post-date">July 24, 2025</p>
+
+  <p>I used Cursor for AI-driven development on my personal projects. It was sleek, smart, and productive — until the pricing changed drastically.</p>
+
+  <p>A true "what the heck" moment for the Cursor community, with that sudden bump in price. But Cursor is essentially paying API costs for every AI request we make, with a huge context window for a big codebase. To stay afloat, they either had to limit usage or charge a lot more for heavy use. This realization made me dig deeper into how Cursor works and whether there was a more cost-effective way to leverage AI for coding.</p>
+
+  <p>When this price change happened, Amazon dropped Kiro. Coincidence? Maybe it was an AI civil war between tech giants to claim the throne. 😄</p>
+
+  <h2>Under the Hood: Cursor Uses Claude (and Others)</h2>
+
+  <p>It turns out Cursor itself is not an AI model — it's a smart interface. I'm impressed with Cursor's smarty-pants move of making a fancy VSCode fork with a chat sidebar. Under the hood, Cursor is powered by a combination of models, including Anthropic's Claude and OpenAI's models. In fact, for complex coding tasks, Cursor users (myself included) often preferred Claude because of its extensive context window and strong coding capabilities.</p>
+
+  <p>The new pricing confirmed this: Claude became expensive on Cursor, while GPT-4.1 (or older models) were "as much as you can suffer" for free. Essentially, Claude was the secret sauce behind Cursor's most useful coding assistance, especially when dealing with larger codebases or tricky problems.</p>
+
+  <p>This led me to ask: if Cursor is just calling Claude's API behind the scenes, could I call Claude's API directly? The answer was yes — and Anthropic actually provides a tool for that. It's called Claude Code, and it's like having Claude as your personal coding assistant without the Cursor middleman.</p>
+
+  <h2>Claude Code: CLI vs GUI</h2>
+
+  <p>Claude Code is Anthropic's official command-line tool for coding tasks. Yes, this is a CLI — Command Line Interface. I'll admit, my first reaction was skepticism. Going from a sleek editor interface to typing commands in a terminal felt like taking a step backward. I love working in terminals though. (80s hacker setup is so cool.)</p>
+
+  <p>But I was wrong. Claude Code is surprisingly powerful. It understands your entire codebase and can turn natural language instructions into actual code changes. It's the same Claude "brain" that powers Cursor, but you're accessing it directly through command-line interactions. It has some drawbacks, which we will discuss later.</p>
+
+  <p>Setting it up was painless — just a quick npm install and I was ready to go. Now I can navigate to any project and run claude to start an interactive chat session. Voilà, we have a Cursor — but not a fancy VSCode fork. This is only available on the command line interface and gets the job done.</p>
+
+  <h2>Breaking Down the Pros and Cons</h2>
+
+  <p>Let me give you the real talk on both options:</p>
+
+  <p><strong>Cursor's Strengths:</strong></p>
+  <ul>
+    <li>Let everyone code — Download, install, start coding. No API keys to manage or configurations to worry about. Anyone can just code whatever they want and find developers to fix it. 😛</li>
+    <li>Steps Interface — The inline suggestions and chat sidebar feel natural, like having your manager constantly watching over your shoulder.</li>
+    <li>All chaos in one place — Everything happens in one place: file browsing, diffs, change reviews.</li>
+    <li>Minimize your bugs — Cursor can introduce 100 bugs, but you have the checkpoints to restore since every chat is considered a Git commit.</li>
+  </ul>
+
+  <p><strong>Cursor's Pain Points:</strong></p>
+  <ul>
+    <li>Tokens = Money — If you lean on AI for all your work, then you need approx. $200.</li>
+    <li>Limited autonomy — Complex multi-file refactors often require lots of hand-holding and step-by-step prompting, even with MCP servers.</li>
+    <li>Context limitations — To manage costs, Cursor might not use the full context window unless you're on a premium plan. This can cause it to miss important details in large projects.</li>
+    <li>Platform dependency — You're locked into Cursor's editor environment, which might not mesh with your existing workflow.</li>
+  </ul>
+
+  <p><strong>Claude Code's Advantages:</strong></p>
+  <ul>
+    <li>Better economics — Direct API usage or a Claude Pro subscription often works out cheaper. And you can pick the model for your tasks and keep it economical with the same throughput.</li>
+    <li>Beast mode — You get the complete context window and can customize how requests are made. Claude Code's agentic abilities mean it can handle complex, multi-step tasks with a single command.</li>
+    <li>Ultimate flexibility — Works with any editor or development environment. No dependency on anything.</li>
+    <li>Always current — Direct access to Anthropic's latest models and features as soon as they're released.</li>
+  </ul>
+
+  <p><strong>Claude Code's Challenges:</strong></p>
+  <ul>
+    <li>Not for all — It's a command-line tool that requires comfort with terminal usage and some documentation R E A D I N G.</li>
+    <li>No GUI — No visual diffs or guided change reviews. You don't have any checkpoints. The prompt will change the files, and you will have to review the changes — otherwise, you won't know what API is exposed.</li>
+    <li>Token responsibility — You're in charge of monitoring usage. Go wild with huge context windows repeatedly, and you might burn through your budget quickly.</li>
+  </ul>
+
+  <p>Pro Tip: Use Claude-monitor for checking usage. Thanks to <a href="https://github.com/Maciek-roboblog">Maciej</a></p>
+
+  <h2>My Real-World Experience</h2>
+
+  <p>After working with both tools, I've found Cursor is good for a novice or any non technical person who wanted to do some quick prototyping without having any coding knowledge. It can lookup for documentation, build, fix, create bugs, rewrite the whole codebase.</p>
+
+  <p>The hiccups starts when the projects grew larger and I start hitting cursor's limits more frequently, Claude Code become my go-to AI-driven development tool. When I'm deep in a complex refactor, it can handle multiple files, run tests, fixes failures and commits everything. It's not perfect yet it's better than Cursor in some way.</p>
+
+  <p>One thing I noticed: Claude Code often maintains better context in large projects, probably because I allow it to use more of its context window. Cursor (unless in Max mode) would sometimes miss connections between files that were far apart in the project structure.</p>
+
+  <p>The bottom line? Both tools are powerful, but they serve different types of developers and workflows. The good news is you don't have to choose forever — you can always switch between them based on what you're working on.</p>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+</body>
+</html>

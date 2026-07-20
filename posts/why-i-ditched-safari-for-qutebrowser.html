@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Why I ditched Safari for Qutebrowser — Yogeshvar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-top: 2rem;
+    }
+    .post-date {
+      color: #555;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.3rem;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+  <h1>Why I ditched Safari for Qutebrowser as my Daily Driver</h1>
+  <p class="post-date">June 5, 2025</p>
+
+  <p>The internet was good when PewDiePie was still a YouTuber and I was a kid playing Dragon Ball Z. One day, I stumbled upon a video titled "<a href="https://www.youtube.com/watch?v=pVI_smLgTY0">I installed Linux (so should you)</a>" from Pews himself. It hit me with a wave of nostalgia — back in college, my Sony VAIO ran Linux Mint like a champ. No Windows, just smooth, clean performance.</p>
+
+  <p>But then life happened. iOS development kicked in, and I found myself glued to macOS. The terminal was my second home, but I always thought ricing was reserved for Arch Linux users with custom kernels, posting screenshots to <a href="https://www.reddit.com/r/unixporn/comments/1g4y8ne/amethyst_my_first_attempt_at_ricing_macos/">r/unixporn</a> like it was their personal gallery.</p>
+
+  <p>Turns out, I was wrong.</p>
+
+  <p>A few deep Reddit dives, blog reads (shoutout <a href="https://www.nexxel.dev/blog/ricing-macos">Nexxel</a>, <a href="https://linkarzu.com/posts/macos/macos-ricing-2025/">Linkarzu</a>, <a href="https://igorbedesqui.com/writing/macos-rice">Igor</a>), the YouTube algorithm convinced me — macOS can be riced. And rice I did. (I might share that whole journey in another post… if I'm hydrated enough. No promises, I don't even drink coffee.)</p>
+
+  <p>But today, let's talk about something specific and glorious: Qutebrowser. (Yes, it's pronounced "cute".)</p>
+
+  <h2>What Even Is Qutebrowser?</h2>
+
+  <p>Imagine if Vim and your browser had a child. That's <a href="https://www.qutebrowser.org/">Qutebrowser</a>. A minimalist, keyboard-driven web browser that strips away GUI fluff and replaces it with raw power.</p>
+
+  <p>No mouse needed. You hint, jump, scroll, and bind your way around the internet.</p>
+
+  <p>It runs on QtWebEngine — the same engine behind Chromium — but trades shiny UI for control and speed.</p>
+
+  <h2>Why I Switched from Safari to Qutebrowser</h2>
+
+  <p>Safari is elegant. Qutebrowser is a keyboard-wielding beast. It's like trading a smooth city bicycle for a motorcycle with a sidecar full of shell scripts.</p>
+
+  <p>What sold me to Qutebrowser?</p>
+
+  <ul>
+    <li><strong>Keyboard Navigation</strong>: <code>f</code> to hint and follow links, <code>:open</code> to open a URL, <code>:tab-close</code>, <code>:history</code>, all without touching the mouse.</li>
+    <li><strong>MPV Integration</strong>: Watching YouTube without ads? Just bind a key to spawn <code>mpv</code> directly on the hinted link.</li>
+    <li><strong>Bookmarks</strong>: Stored in a readable JSON file. You can back them up, grep them, or sync across machines.</li>
+    <li><strong>Customization</strong>: Your config is Python. Want shell scripts tied to keystrokes? Do it.</li>
+  </ul>
+
+  <h2>Configuration Highlights</h2>
+
+  <p>Here are some of the settings I use that make Qutebrowser feel like home:</p>
+
+  <pre><code>config.set('auto_save.session', True)               # I don't lose tabs anymore
+config.set('tabs.position', 'top')                  # Because muscle memory
+config.set('content.blocking.method', 'both')       # Block ads and trackers
+config.set('content.cookies.accept', 'no-3rdparty') # Privacy boost
+config.set('scrolling.smooth', True)                # Like butter
+config.set('url.default_page', 'https://google.com')</code></pre>
+
+  <h2>Power Moves</h2>
+
+  <pre><code>config.bind(",a", "hint links spawn --detach mpv {hint-url}")</code></pre>
+
+  <p>No ads, no distractions. I run YouTube through <code>mpv</code>. It's like pulling the content out of the noise.</p>
+
+  <pre><code>config.set('colors.webpage.darkmode.enabled', True)</code></pre>
+
+  <p>I like my screens dark and my vibes darker.</p>
+
+  <pre><code>config.bind('&lt;Meta-o&gt;', 'open -t https://google.com') # Meta - Command</code></pre>
+
+  <p>Default tab launcher. One shortcut away from escape velocity.</p>
+
+  <h2>The Trade-Offs</h2>
+
+  <p>It's not all perfect:</p>
+
+  <ul>
+    <li>Avoid using it for banking or sensitive data. (I don't know how safe those security features are.)</li>
+    <li>Some modern websites break without a mouse or pop-up support.</li>
+    <li>Twitch doesn't work well natively, but hey, there's always <code>mpv</code></li>
+  </ul>
+
+  <h2>But Is It For You?</h2>
+
+  <p>If you like Vim, keyboard-driven tools, and obsess over your dotfiles — yes. If you need every Chrome extension under the sun and don't want to tinker — maybe not.</p>
+
+  <p>If you're still unsure, ask yourself: "Do I want to launch YouTube, skip all ads, and play it in mpv with a single keystroke?" And mainly without ads? If the answer is yes, welcome to the dark side.</p>
+
+  <h2>Final Thoughts</h2>
+
+  <p>Qutebrowser is not just a browser — it's cool. Most of the modern browsers are too overrated and have too many features — GPU acceleration for what? Watching YouTube? No thanks. I like Qutebrowser because it's simple for me. Just a few keystrokes, and since this is my personal laptop, pretty much surf and entertainment it works.</p>
+
+  <p>And yes, I still use Safari for bank logins. I like to live, not die. But for everything else, Qutebrowser is where I live online.</p>
+
+  <p>Next time, I might or might not dive into how I riced my full macOS setup with Yabai, Simple Bar, and tmux. Give Qutebrowser a try and you won't be disappointed I guess. A moment of silence for Windows users because I don't even know if the word "Ricing" is present in their dictionary.</p>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+</body>
+</html>

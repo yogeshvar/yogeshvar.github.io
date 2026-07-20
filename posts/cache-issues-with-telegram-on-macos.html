@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cache Issues with Telegram on Mac OS — Yogeshvar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-top: 2rem;
+    }
+    .post-date {
+      color: #555;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.3rem;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+  <h1>Cache Issues with Telegram on Mac OS</h1>
+  <p class="post-date">June 29, 2020</p>
+
+  <p>If you don't know what's the real issue, please check out this link on <a href="https://medium.com/@eugene_lazarev/telegram-on-mac-os-takes-no-care-about-your-disk-storage-and-feels-great-about-it-2c62ded92924">Telegram on Mac OS taking no care about your disk storage</a>.</p>
+
+  <p>I have made a few modifications to the bash script created by <a href="https://medium.com/@eugene_lazarev">Eugene Lazarev</a> because I'm lazy enough to not want to run this bash script manually.</p>
+
+  <p>So, I have automated the cache clearing with the help of Automator and LaunchDaemons.</p>
+
+  <p>Why Automator? LaunchDaemons will not run if your Mac is off.</p>
+
+  <p><code>clear_telegram_cache.sh</code> — here is what the updated script looks like:</p>
+
+  <pre><code>#!/bin/bash
+set -e
+
+telegramfolder=$(find ~/Library/Group\ Containers -type d -maxdepth 1 -name "*.keepcoder.Telegram")
+telegramaccountfolder=$(find "${telegramfolder}" -type d -maxdepth 1 -name "account-*")
+
+if [ -d "${telegramaccountfolder}" ]; then
+  echo "No such file or directory"
+else
+  rm -r "${telegramaccountfolder}/postbox/media"
+  echo "Deleted telegram cache"
+fi</code></pre>
+
+  <h2>Automate using LaunchDaemons</h2>
+
+  <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;Label&lt;/key&gt;
+  &lt;string&gt;com.zerowidth.launched.clear_telegram&lt;/string&gt;
+  &lt;key&gt;ProgramArguments&lt;/key&gt;
+  &lt;array&gt;
+    &lt;string&gt;sh&lt;/string&gt;
+    &lt;string&gt;-c&lt;/string&gt;
+    &lt;string&gt;/path/to/clear_telegram_cache.sh&lt;/string&gt;
+  &lt;/array&gt;
+  &lt;key&gt;RunAtLoad&lt;/key&gt;
+  &lt;true/&gt;
+  &lt;key&gt;StartCalendarInterval&lt;/key&gt;
+  &lt;dict&gt;
+    &lt;key&gt;Hour&lt;/key&gt;
+    &lt;integer&gt;9&lt;/integer&gt;
+    &lt;key&gt;Minute&lt;/key&gt;
+    &lt;integer&gt;30&lt;/integer&gt;
+  &lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</code></pre>
+
+  <p>Installation:</p>
+
+  <pre><code>mkdir -p ~/Library/LaunchAgents
+curl https://gist.githubusercontent.com/yogeshvar/2910712810dadcb709c3517f4b228390/raw/clear_telegram_cache.plist > ~/Library/LaunchAgents/clear_telegram.plist
+launchctl load -w ~/Library/LaunchAgents/clear_telegram.plist</code></pre>
+
+  <h2>Automate using Automator</h2>
+
+  <ol>
+    <li>Open <code>Automator</code> application → select <code>Application</code> → click <code>Choose</code>.</li>
+    <li>Select <code>Run Shell Script</code> → copy & paste <code>clear_telegram_cache.sh</code> → click <code>Test Run</code>.</li>
+    <li>Provide a name for the application.</li>
+    <li>Open <code>System Preferences</code> → search for <code>Login Items</code> → add your application.</li>
+  </ol>
+
+  <p>Please let me know if this helps — a huge thanks to Eugene Lazarev for the original bash script. You can also find the gist <a href="https://gist.github.com/yogeshvar/2910712810dadcb709c3517f4b228390">here</a>.</p>
+
+  <p>Thanks for reading 👋 Happy Coding 👨‍💻</p>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+</body>
+</html>

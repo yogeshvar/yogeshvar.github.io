@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MiniForge & MiniConda on M1 — Yogeshvar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-top: 2rem;
+    }
+    .post-date {
+      color: #555;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.3rem;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+  <h1>MiniForge & MiniConda on M1</h1>
+  <p class="post-date">August 23, 2022</p>
+
+  <p>Working with MacBook M1 which is shipped with ARM64 instead of Intel's x86–64 processors was superb fun.</p>
+
+  <p>Hold my beer, it is no fun when it comes to running Tensorflow on M1.</p>
+
+  <h2>Why MiniForge & MiniConda</h2>
+
+  <p>Here's the answer <a href="https://stackoverflow.com/users/2161598/nerohmot">nerohmot</a> from Stackoverflow,</p>
+
+  <p>miniforge is the community (conda-forge) driven minimalistic <code>conda</code> installer. Subsequent package installations come thus from <code>conda-forge</code> channel.</p>
+
+  <p>miniconda is the Anaconda (company) driven minimalistic <code>conda</code> installer. Subsequent package installations come from the <code>anaconda</code> channels (default or otherwise).</p>
+
+  <p>For several projects, we might tend to use different versions of python. One of the shortcomings of MiniForge is no back-port compatibility for older versions of Python. So we have to settle with <code>python 3.8</code> where MiniConda helps us to run older versions on Mac M1 with the help of Rosetta.</p>
+
+  <p>If you are not using <a href="https://brew.sh/">Homebrew</a>, GET IT NOW bruh. It makes your life easier, a free and open-source software package management system that makes installation of any software on your macOS.</p>
+
+  <p>Installing Homebrew:</p>
+
+  <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+
+  <h2>Installing MiniConda & MiniForge</h2>
+
+  <p>For installing both <code>MiniConda</code> & <code>MiniForge</code>:</p>
+
+  <pre><code>brew install miniforge</code></pre>
+
+  <p>We cannot use <code>Homebrew</code> for both, as it will not allow since 'miniconda' conflicts with 'miniforge'. For 'miniconda' installation, we can go with the classic bash installation after getting the installer link from <a href="https://docs.conda.io/en/latest/miniconda.html">MiniConda</a>. The following commands will make <code>miniforge</code> active on your machine.</p>
+
+  <pre><code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+chmod +x Miniforge3-MacOSX-arm64.sh
+sh Miniforge3-MacOSX-arm64.sh
+source ~/miniforge3/bin/activate</code></pre>
+
+  <h2>Installing Tensorflow</h2>
+
+  <pre><code>conda install -c apple tensorflow-deps
+python -m pip install tensorflow-macos</code></pre>
+
+  <p>Now we have <code>TensorFlow</code> successfully installed and we have miniconda for using older versions as well. For switching between miniconda and miniforge, we initialize conda with what we want. For conda initialization, I have tweaked the <code>.zshrc</code>.</p>
+
+  <p>You can also find the gist <a href="https://gist.github.com/yogeshvar/d168249188742eb015aa1a6c09b2d177">here</a>.</p>
+
+  <p>Thanks for reading 👋 Happy Coding 👨‍💻</p>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+</body>
+</html>
