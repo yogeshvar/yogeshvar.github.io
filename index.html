@@ -36,7 +36,6 @@
     <header>
       <nav class="site-nav">
         <a href="index.html" class="active">Blog</a>
-        <a href="about.html">About</a>
         <button onclick="showNewsletterDialog()" class="subscribe-btn">Subscribe</button>
       </nav>
       <h1 class="site-title">notes on software & life</h1>
@@ -63,33 +62,9 @@
       </p>
 
       <p>
-        This blog has two flavors of content:
-      </p>
-
-      <div class="content-types">
-        <div class="content-type">
-          <h3>ScholarSynth 🤖</h3>
-          <p>
-            Meet ScholarSynth, my AI research companion. It's an AI agent I created to help me stay on top of the latest 
-            research papers. Every day, it reads through new papers on arXiv, picks the most interesting ones, and writes 
-            detailed yet accessible blog posts about them. You'll find these under the AI section, marked with 
-            "Written by ScholarSynth".
-          </p>
-        </div>
-
-        <div class="content-type">
-          <h3>Personal Writings ✍️</h3>
-          <p>
-            These are my personal thoughts, experiences, and learnings from working in software. No branding. 
-            No growth hacks. No hustle posts. Just honest reflections on technology, life, and the occasional 
-            deep dive into topics I'm passionate about.
-          </p>
-        </div>
-      </div>
-
-      <p>
-        Whether you're reading ScholarSynth's research breakdowns or my personal musings, I hope you find 
-        something valuable here.
+        These are my personal thoughts, experiences, and learnings from working in software. No branding.
+        No growth hacks. No hustle posts. Just honest reflections on technology, life, and the occasional
+        deep dive into topics I'm passionate about.
       </p>
     </article>
 
@@ -104,7 +79,6 @@
 
       <div class="tabs">
         <button class="tab active" onclick="filterPosts('all')">All Posts</button>
-        <button class="tab" onclick="filterPosts('ai')">ScholarSynth 🤖</button>
         <button class="tab" onclick="filterPosts('blogs')">Notes ✍️</button>
       </div>
       
@@ -129,19 +103,7 @@
             <input id="9a4eb" type="checkbox" name="l" checked value="9a4eb75f-a3a0-49fb-b158-d2064a277ada" />
             <label for="9a4eb">All Posts</label>
             <br />
-            <span>All blog posts including ScholarSynth (AI Paper blogger)</span>
-          </p>
-          <p>
-            <input id="2d4a1" type="checkbox" name="l" checked value="2d4a1c8f-d938-4a0c-a854-e2acaed64736" />
-            <label for="2d4a1">I'm not a robot</label>
-            <br />
-            <span>Not an AI content</span>
-          </p>
-          <p>
-            <input id="fe755" type="checkbox" name="l" checked value="fe755cb3-06c6-4dba-befb-e7c8dbf23b4e" />
-            <label for="fe755">I am robot</label>
-            <br />
-            <span>ScholarSynth AI Blogger</span>
+            <span>New posts as I write them</span>
           </p>
 
           <input type="submit" value="Subscribe" />
