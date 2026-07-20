@@ -201,8 +201,6 @@ function filterPosts(category) {
     // Check which tab should be active
     if (category === 'all' && tab.textContent.includes('All Posts')) {
       tab.classList.add('active');
-    } else if (category === 'ai' && tab.textContent.includes('ScholarSynth')) {
-      tab.classList.add('active');
     } else if (category === 'blogs' && tab.textContent.includes('Notes')) {
       tab.classList.add('active');
     }
@@ -293,7 +291,7 @@ function renderPosts(category, page = 1) {
       <h3 class="card-title">${post.title}</h3>
       <p class="card-excerpt">${post.excerpt}</p>
       <div class="card-meta">
-        <span class="card-category">${post.filepath.includes('/ai/') ? 'ScholarSynth 🤖' : 'Personal ✍️'}</span>
+        <span class="card-category">Personal ✍️</span>
         <span class="card-bullet">•</span>
         <span class="reading-time">${post.readingTime} min read</span>
       </div>
@@ -354,7 +352,7 @@ function showPost(post, date) {
           <span class="card-bullet">•</span>
           <span class="reading-time">${post.readingTime} min read</span>
           <span class="card-bullet">•</span>
-          <span class="post-category">${post.filepath.includes('/ai/') ? 'ScholarSynth 🤖' : 'Personal ✍️'}</span>
+          <span class="post-category">Personal ✍️</span>
         </div>
       </div>
       <div class="post-body">
@@ -960,7 +958,7 @@ async function renderListView(container) {
       listItem.innerHTML = `
         <div class="post-date">${date}</div>
         <div class="post-title">${post.title}</div>
-        <div class="post-category">${post.filepath.includes('/ai/') ? 'ScholarSynth 🤖' : 'Notes ✍️'}</div>
+        <div class="post-category">Notes ✍️</div>
       `;
       
       // Add click handler
@@ -997,7 +995,7 @@ async function renderGridView(container) {
         <h3 class="card-title">${post.title}</h3>
         <p class="card-excerpt">${post.excerpt}</p>
         <div class="card-meta">
-          <span class="card-category">${post.filepath.includes('/ai/') ? 'ScholarSynth 🤖' : 'Personal ✍️'}</span>
+          <span class="card-category">Personal ✍️</span>
           <span class="card-bullet">•</span>
           <span class="reading-time">${post.readingTime} min read</span>
         </div>

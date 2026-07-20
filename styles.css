@@ -1161,19 +1161,9 @@ p {
   white-space: nowrap;
 }
 
-.post-list-item:has([class*="ScholarSynth"]) .post-category {
-  background: rgba(0, 150, 255, 0.1);
-  color: #0096ff;
-}
-
 .post-list-item:has([class*="Notes"]) .post-category {
   background: rgba(255, 123, 0, 0.1);
   color: #ff7b00;
-}
-
-[data-theme="dark"] .post-list-item:has([class*="ScholarSynth"]) .post-category {
-  background: rgba(0, 150, 255, 0.15);
-  color: #40b3ff;
 }
 
 [data-theme="dark"] .post-list-item:has([class*="Notes"]) .post-category {
