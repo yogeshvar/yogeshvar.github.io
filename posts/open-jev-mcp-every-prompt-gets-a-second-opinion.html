@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Open-Jev MCP: Every Prompt Gets a Second Opinion | Yogeshvar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-top: 2rem;
+    }
+    .post-date {
+      color: #555;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.3rem;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: inherit;
+    }
+    figure {
+      margin: 1.5rem 0;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    figcaption {
+      color: #555;
+      font-size: 0.9em;
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+  <h1>Open-Jev MCP: Every Prompt Gets a Second Opinion</h1>
+  <p class="post-date">September 21, 2026</p>
+
+  <p>I type a lot of lazy prompts. "fix the tests". "clean up my home dir". "plan a trip on a budget". My agents are smart enough to figure most of it out. But they don't always stop and notice what I <em>didn't</em> say, or that "clean up" secretly means "delete stuff forever". 😅</p>
+
+  <p>So I built a tiny second opinion that runs before the agent even sees my message. Every prompt I send to Claude Code or Hermes now goes through a local classifier first, and the agent gets a little block of probabilities along with my prompt. It's open source: <a href="https://github.com/yogeshvar/open-jev-mcp">yogeshvar/open-jev-mcp</a>.</p>
+
+  <h2>Wait, what is Jev?</h2>
+
+  <p><a href="https://docs.typesafe.ai/introduction">TypeSafe's Jev</a> is a model that doesn't write text at all. You give it some context, a few typed questions, and it hands back calibrated probabilities. There are three kinds of questions:</p>
+  <ul>
+    <li><strong>noul</strong>: yes/no. "Is a refund requested?" → <code>0.96</code></li>
+    <li><strong>choice</strong>: pick one label. "Which team?" → <code>billing 0.94 · engineering 0.06</code></li>
+    <li><strong>score</strong>: a point on an ordered scale. "How urgent?" → <code>1.2 on 0 to 2</code></li>
+  </ul>
+
+  <p><a href="https://github.com/Zefan-Cai/Open-Jev">Open-Jev</a> by Zefan Cai is an open implementation of the idea: a LoRA adapter and a scoring head on top of Qwen3.5-2B that runs on my own GPU. No autoregressive generation, no parsing JSON out of a chatty model. Just numbers, fast.</p>
+
+  <h2>The idea: a hook on every prompt</h2>
+
+  <p>Open-Jev is great when you know the questions. But I don't want to write questions for every prompt. The right questions for "fix my failing tests" are totally different from the ones for "plan a Kyoto trip". So the pipeline has two stages:</p>
+
+  <ol>
+    <li>A small local LLM (<code>qwen3.5:4b</code> on Ollama) reads my prompt and writes 2 to 5 noul/choice/score questions <em>for that specific prompt</em>. The output is forced into a JSON schema and then validated against Open-Jev's own request rules.</li>
+    <li>Open-Jev answers them, and the result gets injected as context. The agent decides what to do with it.</li>
+  </ol>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/pipeline.png" alt="Pipeline: prompt → Ollama planner → Open-Jev 2B → context block → agent" />
+    <figcaption>The whole pipeline is local. If anything is down or slow, the prompt just goes through unchanged.</figcaption>
+  </figure>
+
+  <p>In Claude Code it's a <code>UserPromptSubmit</code> hook. In Hermes it's a tiny plugin using the <code>pre_llm_call</code> hook. Both call the same Python pipeline, and it fails open: if Ollama or Jev is down, nothing breaks and the prompt goes through as-is.</p>
+
+  <h2>What it looks like in Claude Code</h2>
+
+  <p>The first time it fired, I was just telling Claude the server was up. Even a throwaway message gets probed:</p>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/claude-first-hit.png" alt="Claude Code receiving the Open-Jev pre-analysis on the message 'yes its showing up there'" />
+    <figcaption>The first live hit. Look at <code>context_missing</code>. Hold that thought, it's lying. More on that below.</figcaption>
+  </figure>
+
+  <p>And here it is on a real task: asking Claude to push the repo publicly without leaking anything. Jev picked up that I'd confirmed <code>gh</code> was ready (0.92), and Claude went straight to scanning the staged files for secrets before publishing:</p>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/claude-push.png" alt="Claude Code: push to public repo prompt with Open-Jev context and Claude's reply" />
+    <figcaption>Rendered from the real session transcript; the reply is trimmed with “…”.</figcaption>
+  </figure>
+
+  <h2>What it looks like in Hermes</h2>
+
+  <p>Same pipeline, different agent. I asked Hermes for a budget Kyoto trip. Jev noticed I never gave a number (<code>budget_defined 0.00</code>) or said how many people are going (<code>0.05</code>), and Hermes closed with exactly that follow-up question:</p>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/hermes-kyoto.png" alt="Hermes planning a Kyoto trip using the Open-Jev pre-analysis" />
+    <figcaption>A real <code>hermes chat</code> run. The planner even added a meta question about the pre-analysis itself, because my prompt mentioned it. Cute.</figcaption>
+  </figure>
+
+  <h2>The bug: a 2B model vs. the word "not"</h2>
+
+  <p>Remember <code>context_missing</code>? Early on, the planner loved writing questions like "The user has <em>not</em> provided the error output." Totally reasonable. Except the 2B model is bad at negation. When that claim was obviously true, it said <code>0.04</code>. Backwards.</p>
+
+  <p>The fix was boring and it worked: the planner is now told to only write <strong>positive</strong> claims ("The message includes the error output"), and a validator rejects any yes/no question containing "not", "missing", "unclear" and friends, asking the planner to retry. A low probability now simply means "missing".</p>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/negation-fix.png" alt="Before and after the negation fix: 0.04 wrong, 0.02 correct, control 0.80" />
+    <figcaption>Same prompt, before and after. The control (traceback actually pasted) scores 0.80, so it's really reading the message.</figcaption>
+  </figure>
+
+  <h2>jev-server: start | stop | status</h2>
+
+  <p>Running <code>python -m jev.server --checkpoint … --device cuda:0 --max-length 4096 …</code> in a terminal tab gets old fast. So there's a small script for it:</p>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/jev-server.png" alt="jev-server status, stop and start output" />
+    <figcaption><code>status</code> checks both Jev and the Ollama planner model. A warm start takes about 4 seconds.</figcaption>
+  </figure>
+
+  <h2>It's an MCP server too</h2>
+
+  <p>The hooks are the automatic part. The same package is also an MCP server, so both agents can call Jev on purpose: <code>jev_ask</code> for your own typed questions, <code>jev_analyze</code> to run the full pipeline on any text, <code>jev_plan</code> to see the questions without running Jev, and <code>jev_health</code>.</p>
+
+  <figure>
+    <img src="../assets/images/open-jev-mcp/mcp-connected.png" alt="claude mcp list and hermes mcp test showing open-jev connected with 4 tools" />
+    <figcaption>Connected in both Claude Code and Hermes.</figcaption>
+  </figure>
+
+  <h2>The numbers</h2>
+
+  <ul>
+    <li>About <strong>2 to 3 seconds</strong> added per prompt. Most of it is the planner (1.8 to 2.8 s). Jev itself answers in 250 to 430 ms once warm.</li>
+    <li>Both models together use about <strong>9.9 GB</strong> of my RTX 4070's 12 GB. It fits, but just barely.</li>
+    <li>11 tests, including a check against Open-Jev's own request compiler, and a fail-open test where both services are dead.</li>
+  </ul>
+
+  <h2>Honest limits</h2>
+
+  <ul>
+    <li><strong>It's a hint, not a guardrail.</strong> "Delete anything older than a month" only scored 0.29 on "would irreversibly delete data", while <code>rm -rf</code> scored 0.95. The 2B model reacts to scary words more than to meaning.</li>
+    <li><strong>Agents can ignore it.</strong> In one Hermes run, Jev correctly said I hadn't pasted the error (0.02), and Hermes went on a 71-tool-call search of my projects anyway instead of just asking.</li>
+    <li><strong>The planner still guesses sometimes</strong>, like asking about hotel type for a trip I never described. Harmless, but it wastes a question slot.</li>
+    <li>It adds latency to <em>every</em> prompt, including "thanks!". Short prompts and slash commands are skipped, and <code>OPENJEV_DISABLE=1</code> turns it off.</li>
+  </ul>
+
+  <h2>Try it</h2>
+
+  <p>You need an NVIDIA GPU, Ollama and uv. The README walks through setting up Open-Jev, the planner model, and wiring the hook and MCP into Claude Code and Hermes.</p>
+
+  <figure>
+    <a href="https://github.com/yogeshvar/open-jev-mcp"><img src="../assets/images/open-jev-mcp/github-repo.png" alt="The open-jev-mcp repository on GitHub" /></a>
+    <figcaption><a href="https://github.com/yogeshvar/open-jev-mcp">github.com/yogeshvar/open-jev-mcp</a>, MIT licensed.</figcaption>
+  </figure>
+
+  <p>Big thanks to <a href="https://github.com/Zefan-Cai/Open-Jev">Zefan Cai</a> for Open-Jev, and to TypeSafe for the Jev idea. And yes, Claude Code helped me build this, while the hook was probing every message I sent it. Very meta. 🙃</p>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+</body>
+</html>
