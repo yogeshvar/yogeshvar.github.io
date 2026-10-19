@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perch: A Little Shelf for My Mac | Yogeshvar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-top: 2rem;
+    }
+    .post-date {
+      color: #555;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.3rem;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: inherit;
+    }
+    figure {
+      margin: 1.5rem 0;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    video {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+    }
+    figcaption {
+      color: #555;
+      font-size: 0.9em;
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <p><a href="../index.html">← back to the blog</a></p>
+
+  <h1>Perch: A Little Shelf for My Mac</h1>
+  <p class="post-date">October 18, 2026</p>
+
+  <p>I built a small Mac app called Perch. You pull down from the top of the screen with two fingers (or press <code>⌘⇧L</code>) and a shelf slides out with a terminal, your clipboard history, a place to drop files, and notes. Let go, and it slides back up. 🪺</p>
+
+  <figure>
+    <video autoplay muted loop playsinline preload="metadata" poster="../assets/images/perch/perch-demo-poster.png" aria-label="A scripted demo of Perch sliding down, showing the terminal, clipboard, files and notes">
+      <source src="../assets/images/perch/perch-demo.webm" type="video/webm" />
+      <source src="../assets/images/perch/perch-demo.mp4" type="video/mp4" />
+    </video>
+    <figcaption>A scripted demo of the real interface, not a screen recording of me using it.</figcaption>
+  </figure>
+
+  <h2>Where the idea came from</h2>
+
+  <p>A friend of mine used Unclutter back in the day, and I remember how handy it looked: notes and clipboard history, always one gesture away. It was easy, it stayed out of the way, and it was a proper productivity tool. I never had the money to buy it.</p>
+
+  <p>That stuck with me. At some point the thought was simply: why not build one like that, and keep it open? So I did. Perch is open source, and you can read every line of it.</p>
+
+  <h2>What changed since then</h2>
+
+  <p>Back then the shelf was notes and clipboard. These days a lot of my work happens in the terminal, and that's even more true now that I'm running agents and other AI tools there. So Perch has two panes the original idea didn't need: a <strong>terminal</strong> (you can start Claude Code or Codex right in it) and a <strong>files</strong> shelf to park things you're dragging around. Terminal, clipboard, notes, files, all in one pull-down.</p>
+
+  <figure>
+    <img src="../assets/images/perch/perch-dark.png" alt="Perch in dark mode with the terminal, clipboard, files and notes panes open" />
+    <figcaption>Dark mode. There's a light one too, and each pane collapses to a thin rail.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="../assets/images/perch/perch-light.png" alt="Perch in light mode with the same four panes" />
+    <figcaption>Light mode, same four panes.</figcaption>
+  </figure>
+
+  <h2>Building it with Claude</h2>
+
+  <p>I built Perch with Claude Code, with a few Claude subagents doing separate jobs (the app changes, the packaging, the website) and fresh ones checking the work afterwards. It was a very "tell it what I want, look at the result, tell it what's wrong" kind of project. It started out under the name Ledge, and I changed it to Perch because it's shorter and easier to say.</p>
+
+  <p>A few things broke along the way, which is the fun part:</p>
+  <ul>
+    <li><strong>The pull went the wrong way.</strong> With natural scrolling on, pulling down looked like scrolling up to the app, so it ignored me. It now checks which scroll direction macOS is using.</li>
+    <li><strong>Dropping a file crashed the whole app.</strong> I stopped asking macOS for file icons and draw simple ones myself.</li>
+    <li><strong>Collapsing a pane left a big empty gap,</strong> and the dividers wouldn't drag properly. That took a few rounds of fixing the layout.</li>
+  </ul>
+
+  <p>It also has tests: 406 of them, covering all the TypeScript code, plus a script that runs the real app and checks the mouse interactions. That's the part I'm happiest I didn't skip. 😅</p>
+
+  <h2>Try it</h2>
+
+  <pre><code>brew install --cask yogeshvar/perch/perch</code></pre>
+
+  <p>A few honest caveats: it's not notarized by Apple (I don't have a developer account), so the first launch needs a manual "Open Anyway" in System Settings. It's Apple Silicon only, macOS 13 or newer, and the pull gesture needs Accessibility permission. The details are on the <a href="https://yogeshvar.github.io/perch/">Perch page</a>, and the code is at <a href="https://github.com/yogeshvar/perch">yogeshvar/perch</a>.</p>
+
+</body>
+</html>
