@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Perch: A Little Shelf for My Mac | Yogeshvar</title>
+  <title>Pullshelf: A Little Shelf for My Mac | Yogeshvar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -64,13 +64,15 @@
 
   <p><a href="../index.html">← back to the blog</a></p>
 
-  <h1>Perch: A Little Shelf for My Mac</h1>
-  <p class="post-date">October 18, 2026</p>
+  <h1>Pullshelf: A Little Shelf for My Mac</h1>
+  <p class="post-date">October 18, 2026 · updated October 29, 2026</p>
 
-  <p>I built a small Mac app called Perch. You pull down from the top of the screen with two fingers (or press <code>⌘⇧L</code>) and a shelf slides out with a terminal, your clipboard history, a place to drop files, and notes. Let go, and it slides back up. 🪺</p>
+  <p><strong>Update:</strong> this app was called Perch when I wrote this post. I renamed it <strong>Pullshelf</strong> because other Mac apps already use the name Perch, and I wanted something people could actually find. Nothing else changed: same app, new name. If you installed Perch, your notes and clips move over automatically the first time you open Pullshelf. The old brew command no longer works, so use the one in the "Try it" section below.</p>
+
+  <p>I built a small Mac app called Pullshelf (it was Perch when I first wrote this). You pull down from the top of the screen with two fingers (or press <code>⌘⇧L</code>) and a shelf slides out with a terminal, your clipboard history, a place to drop files, and notes. Let go, and it slides back up. 🪺</p>
 
   <figure>
-    <video autoplay muted loop playsinline preload="metadata" poster="../assets/images/perch/perch-demo-poster.png" aria-label="A scripted demo of Perch sliding down, showing the terminal, clipboard, files and notes">
+    <video autoplay muted loop playsinline preload="metadata" poster="../assets/images/perch/perch-demo-poster.png" aria-label="A scripted demo of Pullshelf sliding down, showing the terminal, clipboard, files and notes">
       <source src="../assets/images/perch/perch-demo.webm" type="video/webm" />
       <source src="../assets/images/perch/perch-demo.mp4" type="video/mp4" />
     </video>
@@ -81,25 +83,25 @@
 
   <p>A friend of mine used Unclutter back in the day, and I remember how handy it looked: notes and clipboard history, always one gesture away. It was easy, it stayed out of the way, and it was a proper productivity tool. I never had the money to buy it.</p>
 
-  <p>That stuck with me. At some point the thought was simply: why not build one like that, and keep it open? So I did. Perch is open source, and you can read every line of it.</p>
+  <p>That stuck with me. At some point the thought was simply: why not build one like that, and keep it open? So I did. Pullshelf is open source, and you can read every line of it.</p>
 
   <h2>What changed since then</h2>
 
-  <p>Back then the shelf was notes and clipboard. These days a lot of my work happens in the terminal, and that's even more true now that I'm running agents and other AI tools there. So Perch has two panes the original idea didn't need: a <strong>terminal</strong> (you can start Claude Code or Codex right in it) and a <strong>files</strong> shelf to park things you're dragging around. Terminal, clipboard, notes, files, all in one pull-down.</p>
+  <p>Back then the shelf was notes and clipboard. These days a lot of my work happens in the terminal, and that's even more true now that I'm running agents and other AI tools there. So Pullshelf has two panes the original idea didn't need: a <strong>terminal</strong> (you can start Claude Code or Codex right in it) and a <strong>files</strong> shelf to park things you're dragging around. Terminal, clipboard, notes, files, all in one pull-down.</p>
 
   <figure>
-    <img src="../assets/images/perch/perch-dark.png" alt="Perch in dark mode with the terminal, clipboard, files and notes panes open" />
+    <img src="../assets/images/perch/perch-dark.png" alt="Pullshelf in dark mode with the terminal, clipboard, files and notes panes open" />
     <figcaption>Dark mode. There's a light one too, and each pane collapses to a thin rail.</figcaption>
   </figure>
 
   <figure>
-    <img src="../assets/images/perch/perch-light.png" alt="Perch in light mode with the same four panes" />
+    <img src="../assets/images/perch/perch-light.png" alt="Pullshelf in light mode with the same four panes" />
     <figcaption>Light mode, same four panes.</figcaption>
   </figure>
 
   <h2>Building it with Claude</h2>
 
-  <p>I built Perch with Claude Code, with a few Claude subagents doing separate jobs (the app changes, the packaging, the website) and fresh ones checking the work afterwards. It was a very "tell it what I want, look at the result, tell it what's wrong" kind of project. It started out under the name Ledge, and I changed it to Perch because it's shorter and easier to say.</p>
+  <p>I built Pullshelf with Claude Code, with a few Claude subagents doing separate jobs (the app changes, the packaging, the website) and fresh ones checking the work afterwards. It was a very "tell it what I want, look at the result, tell it what's wrong" kind of project. It started out under the name Ledge, then became Perch, and it's now called Pullshelf (more on that at the top).</p>
 
   <p>A few things broke along the way, which is the fun part:</p>
   <ul>
@@ -110,11 +112,18 @@
 
   <p>It also has tests: 406 of them, covering all the TypeScript code, plus a script that runs the real app and checks the mouse interactions. That's the part I'm happiest I didn't skip. 😅</p>
 
+  <figure>
+    <video controls muted playsinline preload="metadata" style="max-width:320px" aria-label="A vertical version of the scripted demo of Pullshelf">
+      <source src="../assets/images/perch/pullshelf-promo-vertical.mp4" type="video/mp4" />
+    </video>
+    <figcaption>A short vertical clip, same scripted demo of the real interface.</figcaption>
+  </figure>
+
   <h2>Try it</h2>
 
-  <pre><code>brew install --cask yogeshvar/perch/perch</code></pre>
+  <pre><code>brew install --cask yogeshvar/pullshelf/pullshelf</code></pre>
 
-  <p>A few honest caveats: it's not notarized by Apple (I don't have a developer account), so the first launch needs a manual "Open Anyway" in System Settings. It's Apple Silicon only, macOS 13 or newer, and the pull gesture needs Accessibility permission. The details are on the <a href="https://yogeshvar.github.io/perch/">Perch page</a>, and the code is at <a href="https://github.com/yogeshvar/perch">yogeshvar/perch</a>.</p>
+  <p>A few honest caveats: it's not notarized by Apple (I don't have a developer account), so the first launch needs a manual "Open Anyway" in System Settings. It's Apple Silicon only, macOS 13 or newer, and the pull gesture needs Accessibility permission. The details are on the <a href="https://pullshelf.vercel.app/">Pullshelf site</a>, and the code is at <a href="https://github.com/yogeshvar/pullshelf">yogeshvar/pullshelf</a>.</p>
 
 </body>
 </html>
